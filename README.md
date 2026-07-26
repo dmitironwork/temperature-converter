@@ -1,4 +1,4 @@
-# TemperatureConverter
+# TemperatureConverter - Console App
 
 Консольна Java-програма для конвертації температури між Цельсієм (C), Фаренгейтом (F) і Кельвіном (K)
 
