@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class TemperatureConverter {
 
-    enum Unit {
+    public enum Unit {
         CELSIUS, FAHRENHEIT, KELVIN, EXIT
     }
 
@@ -16,7 +16,7 @@ public class TemperatureConverter {
             System.out.println("\nEnter FROM unit ('C', 'F', 'K') or 'E' to exit:");
             String fromInput = scanner.next();
 
-            Unit fromUnit = parseUnit(fromInput);
+            Unit fromUnit = InputValidator.parseUnit(fromInput);
 
             if (fromUnit == Unit.EXIT) {
                 System.out.println("Bye");
@@ -28,14 +28,11 @@ public class TemperatureConverter {
                 continue;
             }
 
-            System.out.println("Enter TO unit ('C', 'F', 'K'):");
-            String toInput = scanner.next();
+            Unit toUnit = InputValidator.readToUnit(scanner, fromUnit);
 
-            Unit toUnit = parseUnit(toInput);
-
-            if (toUnit == null || toUnit == Unit.EXIT) {
-                System.out.println("Wrong choice, try again");
-                continue;
+            if (toUnit == null) {
+                System.out.println("Bye");
+                break;
             }
 
             System.out.println("Enter the temperature value:");
@@ -44,20 +41,6 @@ public class TemperatureConverter {
             double result = convert(fromUnit, toUnit, inputValue);
 
             System.out.println(inputValue + " " + fromUnit + " = " + result + " " + toUnit);
-        }
-    }
-
-    private static Unit parseUnit(String input) {
-        if (input.equalsIgnoreCase("C")) {
-            return Unit.CELSIUS;
-        } else if (input.equalsIgnoreCase("F")) {
-            return Unit.FAHRENHEIT;
-        } else if (input.equalsIgnoreCase("K")) {
-            return Unit.KELVIN;
-        } else if (input.equalsIgnoreCase("E")) {
-            return Unit.EXIT;
-        } else {
-            return null;
         }
     }
 
