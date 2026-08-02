@@ -24,7 +24,7 @@ public class TemperatureCalculatorTest {
     }
 
     @Test
-    public void testCelsiusToFarenheit_freezingPoin() {
+    public void testCelsiusToFahrenheit_freezingPoint() {
         double result = TemperatureCalculator.celsiusToFahrenheit(0.0);
         Assert.assertTrue(TestDataHelper.isCloseEnough(result, 32.0));
     }
@@ -33,6 +33,12 @@ public class TemperatureCalculatorTest {
     public void testCelsiusToFahrenheit_boilingPoint() {
         double result = TemperatureCalculator.celsiusToFahrenheit(100);
         Assert.assertTrue(TestDataHelper.isCloseEnough(result, 212.0));
+    }
+
+    @Test
+    public void testCelsiusToKelvin_zero() {
+        double result = TemperatureCalculator.celsiusToKelvin(0.0);
+        Assert.assertTrue(TestDataHelper.isCloseEnough(result, 273.15));
     }
 
     @BeforeMethod
