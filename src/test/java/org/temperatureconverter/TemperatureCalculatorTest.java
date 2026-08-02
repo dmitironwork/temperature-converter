@@ -5,8 +5,20 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
+import java.util.List;
 
 public class TemperatureCalculatorTest {
+
+    @Test(groups = {"celsius"})
+    public void testMultipleCelsiusValuesRoundTrip() {
+        List<Double> celsiusValues = TestDataHelper.sampleCelsiusValues();
+
+        for (double celsius : celsiusValues) {
+            double fahrenheit = TemperatureCalculator.celsiusToFahrenheit(celsius);
+            double backToCelsius = TemperatureCalculator.fahrenheitToCelsius(fahrenheit);
+            Assert.assertTrue(TestDataHelper.isCloseEnough(backToCelsius, celsius));
+        }
+    }
 
     @DataProvider(name = "fahrenheitToCelsiusData")
     public Object[][] fahrenheitToCelsiusData() {
